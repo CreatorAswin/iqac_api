@@ -44,10 +44,15 @@ export default function Upload() {
   // Auto-populate form fields when in reupload mode
   useEffect(() => {
     if (reuploadDoc) {
-      setSelectedCriteria(`c${reuploadDoc.criteria}`);
+      // Set criteria with proper format (e.g., "c1")
+      const criteriaId = reuploadDoc.criteria.startsWith('c')
+        ? reuploadDoc.criteria
+        : `c${reuploadDoc.criteria}`;
+      setSelectedCriteria(criteriaId);
       setSelectedSubCriteria(reuploadDoc.subCriteria);
       setSelectedYear(reuploadDoc.academicYear);
-      setRemarks(reuploadDoc.remarks || '');
+      // Don't pre-fill remarks - let faculty add new remarks for re-upload
+      setRemarks('');
     }
   }, [reuploadDoc]);
 

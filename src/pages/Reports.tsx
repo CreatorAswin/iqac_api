@@ -212,7 +212,9 @@ export default function Reports() {
                 <Users className="w-8 h-8 opacity-80" />
                 <div>
                   <p className="text-sm opacity-80">Active Faculty</p>
-                  <p className="text-3xl font-bold">{faculty.length}</p>
+                  <p className="text-3xl font-bold">
+                    {facultyLoading ? '-' : faculty.length}
+                  </p>
                 </div>
               </div>
             </CardContent>

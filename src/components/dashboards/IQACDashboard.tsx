@@ -69,19 +69,20 @@ export function IQACDashboard() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          title="Pending Review"
-          value={pending}
-          subtitle="Needs verification"
-          icon={<Clock className="w-5 md:w-6 h-5 md:h-6" />}
-          variant="warning"
-        />
+
         <StatCard
           title="Approved"
           value={approved}
           subtitle="Documents verified"
           icon={<CheckCircle className="w-5 md:w-6 h-5 md:h-6" />}
           variant="success"
+        />
+        <StatCard
+          title="Pending Review"
+          value={pending}
+          subtitle="Needs verification"
+          icon={<Clock className="w-5 md:w-6 h-5 md:h-6" />}
+          variant="warning"
         />
         <StatCard
           title="Rejected"
