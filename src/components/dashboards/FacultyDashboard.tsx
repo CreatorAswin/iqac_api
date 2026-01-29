@@ -147,7 +147,7 @@ export function FacultyDashboard() {
           variant="warning"
         />
         <StatCard
-          title="Rejected"
+          title="Declined"
           value={rejected}
           subtitle="Needs re-upload"
           icon={<XCircle className="w-5 md:w-6 h-5 md:h-6" />}
@@ -160,7 +160,7 @@ export function FacultyDashboard() {
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-rose-700">
               <AlertTriangle className="w-5 h-5" />
-              Action Required: Rejected Documents
+              Declined Documents - Re-upload Required
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -286,8 +286,8 @@ export function FacultyDashboard() {
               {documents.slice(0, 5).map((doc) => (
                 <div key={doc.id} className="flex items-center gap-4 p-3 bg-muted/30 rounded-lg">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${doc.iqacStatus === 'Approved' ? 'bg-emerald-100 text-emerald-600' :
-                      doc.iqacStatus === 'Rejected' ? 'bg-rose-100 text-rose-600' :
-                        'bg-amber-100 text-amber-600'
+                    doc.iqacStatus === 'Rejected' ? 'bg-rose-100 text-rose-600' :
+                      'bg-amber-100 text-amber-600'
                     }`}>
                     {doc.iqacStatus === 'Approved' ? <CheckCircle className="w-5 h-5" /> :
                       doc.iqacStatus === 'Rejected' ? <XCircle className="w-5 h-5" /> :
