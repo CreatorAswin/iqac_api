@@ -21,7 +21,7 @@ const statusConfig = {
     icon: CheckCircle,
   },
   rejected: {
-    label: 'Rejected',
+    label: 'Declined',
     className: 'status-rejected',
     icon: XCircle,
   },
