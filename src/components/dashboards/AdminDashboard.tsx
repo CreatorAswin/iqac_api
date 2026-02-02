@@ -54,13 +54,13 @@ export function AdminDashboard() {
   const recentDocuments = documents.slice(0, 5);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-foreground">Admin Dashboard</h1>
         <p className="text-muted-foreground mt-1">Complete system overview and management</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mobile-stat-grid">
         <StatCard
           title="Total Documents"
           value={documents.length}
@@ -90,7 +90,7 @@ export function AdminDashboard() {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -99,7 +99,7 @@ export function AdminDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[250px] md:h-[300px]">
+            <div className="h-[200px] sm:h-[250px] md:h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={criteriaStats} barGap={0}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -128,7 +128,7 @@ export function AdminDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[200px] md:h-[250px]">
+            <div className="h-[180px] sm:h-[200px] md:h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -148,11 +148,11 @@ export function AdminDashboard() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="flex justify-center gap-4 mt-2 flex-wrap">
+            <div className="flex justify-center gap-3 sm:gap-4 mt-2 flex-wrap">
               {pieData.map((entry, index) => (
                 <div key={entry.name} className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }} />
-                  <span className="text-sm text-muted-foreground">{entry.name}</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">{entry.name}</span>
                 </div>
               ))}
             </div>

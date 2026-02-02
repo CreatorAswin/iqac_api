@@ -2,10 +2,10 @@ import { StatCard } from '@/components/ui/stat-card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useDocuments, useStats } from '@/hooks/useApiData';
 import { naacCriteria } from '@/data/criteriaData';
-import { 
-  FileText, 
-  CheckCircle, 
-  Clock, 
+import {
+  FileText,
+  CheckCircle,
+  Clock,
   XCircle,
   TrendingUp,
   BarChart3,
@@ -55,13 +55,13 @@ export function ManagementDashboard() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground">Analytics Dashboard</h1>
-        <p className="text-muted-foreground mt-1">AQAR progress overview and institutional metrics</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground">Management Dashboard</h1>
+        <p className="text-muted-foreground mt-1">Overview of IQAC activities and progress</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mobile-stat-grid">
         <StatCard
           title="Overall Completion"
           value={total > 0 ? `${Math.round((approved / total) * 100)}%` : '0%'}
@@ -104,8 +104,8 @@ export function ManagementDashboard() {
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis type="number" domain={[0, 100]} stroke="hsl(var(--muted-foreground))" fontSize={12} />
                   <YAxis dataKey="criteria" type="category" stroke="hsl(var(--muted-foreground))" fontSize={12} width={40} />
-                  <Tooltip 
-                    contentStyle={{ 
+                  <Tooltip
+                    contentStyle={{
                       backgroundColor: 'hsl(var(--card))',
                       border: '1px solid hsl(var(--border))',
                       borderRadius: '8px',
@@ -189,7 +189,7 @@ export function ManagementDashboard() {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-                          <div 
+                          <div
                             className="h-full bg-primary rounded-full transition-all"
                             style={{ width: `${criteria.percentage}%` }}
                           />

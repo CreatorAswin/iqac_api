@@ -31,38 +31,50 @@ const iconContainerStyles = {
 
 export function StatCard({ title, value, subtitle, icon, trend, variant = 'default' }: StatCardProps) {
   return (
-    <div className={cn('stat-card', variantStyles[variant])}>
-      <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', iconContainerStyles[variant])}>
-        {icon}
-      </div>
-      <div className="flex-1">
-        <p className={cn(
-          'text-sm font-medium',
-          variant === 'default' ? 'text-muted-foreground' : 'text-white/80'
+    <div className={cn('stat-card-mobile', variantStyles[variant])}>
+      <div className="flex items-center gap-3 sm:gap-4 w-full">
+        {/* Icon - hidden on mobile, visible on tablet+ */}
+        <div className={cn(
+          'hidden sm:flex w-14 h-14 rounded-xl items-center justify-center shrink-0 transition-transform hover:scale-105',
+          iconContainerStyles[variant]
         )}>
-          {title}
-        </p>
-        <div className="flex items-baseline gap-2">
-          <p className="text-2xl font-bold">{value}</p>
-          {trend && (
-            <span className={cn(
-              'text-xs font-medium',
-              trend.isPositive ? 'text-emerald-500' : 'text-rose-500',
-              variant !== 'default' && 'text-white/80'
-            )}>
-              {trend.isPositive ? '+' : ''}{trend.value}%
-            </span>
-          )}
+          {icon}
         </div>
-        {subtitle && (
+
+        {/* Content section - full width on mobile */}
+        <div className="flex-1 min-w-0">
           <p className={cn(
-            'text-xs mt-1',
+            'text-xs sm:text-sm font-medium mb-1',
+            variant === 'default' ? 'text-muted-foreground' : 'text-white/80'
+          )}>
+            {title}
+          </p>
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold leading-none">{value}</p>
+            {trend && (
+              <span className={cn(
+                'text-xs font-semibold px-1.5 py-0.5 rounded',
+                trend.isPositive ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700',
+                variant !== 'default' && 'bg-white/20 text-white'
+              )}>
+                {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Subtitle at bottom, full width */}
+      {subtitle && (
+        <div className="w-full mt-2 pt-2 border-t border-current/10">
+          <p className={cn(
+            'text-xs leading-tight',
             variant === 'default' ? 'text-muted-foreground' : 'text-white/70'
           )}>
             {subtitle}
           </p>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

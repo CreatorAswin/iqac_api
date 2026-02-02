@@ -117,7 +117,12 @@
     font-family: 'Inter', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold tracking-tight;
   }
 }
@@ -140,11 +145,15 @@
   }
 
   .dashboard-card {
-    @apply bg-card rounded-lg border shadow-sm p-6 transition-shadow hover:shadow-md;
+    @apply bg-card rounded-xl border shadow-sm p-4 sm:p-6 transition-all hover:shadow-md;
   }
 
   .stat-card {
-    @apply bg-card rounded-lg border shadow-sm p-5 flex items-start gap-4;
+    @apply bg-card rounded-lg border shadow-sm p-3 sm:p-5 flex items-start gap-3 sm:gap-4;
+  }
+
+  .stat-card-mobile {
+    @apply bg-card rounded-xl border shadow-sm p-4 sm:p-5 flex flex-col transition-all hover:shadow-md hover:border-primary/20;
   }
 
   .nav-link {
@@ -163,5 +172,22 @@
 @layer utilities {
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent;
+  }
+
+  /* Mobile-specific utilities */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  .mobile-card-spacing {
+    @apply space-y-3 sm:space-y-4;
+  }
+
+  .mobile-grid-gap {
+    @apply gap-3 sm:gap-4 md:gap-6;
+  }
+
+  .mobile-stat-grid {
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4;
   }
 }

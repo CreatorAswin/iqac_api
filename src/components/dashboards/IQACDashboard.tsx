@@ -56,19 +56,19 @@ export function IQACDashboard() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground">IQAC Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Document verification and faculty management</p>
+          <p className="text-muted-foreground mt-1">Review and verify faculty document submissions</p>
         </div>
         <Button onClick={() => navigate('/verification')}>
-          <Eye className="w-4 h-4 mr-2" />
-          Review Pending ({pending})
+          <CheckCircle className="w-4 h-4 mr-2" />
+          Review Documents
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mobile-stat-grid">
 
         <StatCard
           title="Approved"

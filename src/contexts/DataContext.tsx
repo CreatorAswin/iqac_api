@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { localApi, Document, User as ApiUser, Assignment } from '@/services/localApi';
+import { useAuth } from './AuthContext';
 
 interface StatsData {
     totalDocuments: number;
@@ -42,28 +43,32 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
+    const { isAuthenticated, user } = useAuth();
+
     // Documents state
     const [documents, setDocuments] = useState<Document[]>([]);
-    const [documentsLoading, setDocumentsLoading] = useState(true);
+    const [documentsLoading, setDocumentsLoading] = useState(false);
     const [documentsError, setDocumentsError] = useState<string | null>(null);
 
     // Users state
     const [users, setUsers] = useState<ApiUser[]>([]);
-    const [usersLoading, setUsersLoading] = useState(true);
+    const [usersLoading, setUsersLoading] = useState(false);
     const [usersError, setUsersError] = useState<string | null>(null);
 
     // Assignments state
     const [assignments, setAssignments] = useState<Assignment[]>([]);
-    const [assignmentsLoading, setAssignmentsLoading] = useState(true);
+    const [assignmentsLoading, setAssignmentsLoading] = useState(false);
     const [assignmentsError, setAssignmentsError] = useState<string | null>(null);
 
     // Stats state
     const [stats, setStats] = useState<StatsData | null>(null);
-    const [statsLoading, setStatsLoading] = useState(true);
+    const [statsLoading, setStatsLoading] = useState(false);
     const [statsError, setStatsError] = useState<string | null>(null);
 
     // Fetch documents
     const fetchDocuments = useCallback(async () => {
+        if (!isAuthenticated) return;
+
         setDocumentsLoading(true);
         setDocumentsError(null);
         try {
@@ -79,10 +84,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         } finally {
             setDocumentsLoading(false);
         }
-    }, []);
+    }, [isAuthenticated]);
 
     // Fetch users
     const fetchUsers = useCallback(async () => {
+        if (!isAuthenticated) return;
+
         setUsersLoading(true);
         setUsersError(null);
         try {
@@ -98,10 +105,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         } finally {
             setUsersLoading(false);
         }
-    }, []);
+    }, [isAuthenticated]);
 
     // Fetch assignments
     const fetchAssignments = useCallback(async () => {
+        if (!isAuthenticated) return;
+
         setAssignmentsLoading(true);
         setAssignmentsError(null);
         try {
@@ -117,10 +126,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         } finally {
             setAssignmentsLoading(false);
         }
-    }, []);
+    }, [isAuthenticated]);
 
     // Fetch stats
     const fetchStats = useCallback(async () => {
+        if (!isAuthenticated) return;
+
         setStatsLoading(true);
         setStatsError(null);
         try {
@@ -136,15 +147,21 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         } finally {
             setStatsLoading(false);
         }
-    }, []);
+    }, [isAuthenticated]);
 
-    // Load all data once on mount
+    // Load all data when user is authenticated
     useEffect(() => {
-        fetchDocuments();
-        fetchUsers();
-        fetchAssignments();
-        fetchStats();
-    }, [fetchDocuments, fetchUsers, fetchAssignments, fetchStats]);
+        if (isAuthenticated) {
+            fetchDocuments();
+            fetchAssignments();
+            fetchStats();
+
+            // Only fetch users if user is Admin or IQAC
+            if (user?.role === 'admin' || user?.role === 'iqac') {
+                fetchUsers();
+            }
+        }
+    }, [isAuthenticated, user?.role, fetchDocuments, fetchUsers, fetchAssignments, fetchStats]);
 
     const value: DataContextType = {
         documents,

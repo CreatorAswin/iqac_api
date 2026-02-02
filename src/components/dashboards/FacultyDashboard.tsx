@@ -112,7 +112,7 @@ export function FacultyDashboard() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground">My Dashboard</h1>
@@ -124,7 +124,7 @@ export function FacultyDashboard() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mobile-stat-grid">
         <StatCard
           title="Assigned Criteria"
           value={allItems.length}
