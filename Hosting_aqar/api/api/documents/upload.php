@@ -56,7 +56,8 @@ try {
     }
 
     // Create upload directory structure
-    $uploadDir = __DIR__ . '/../../IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria;
+    // Go up 3 levels to reach root: documents/ -> api/ -> api/ -> root (where IQAC, api, config, includes are at same level)
+    $uploadDir = __DIR__ . '/../../../IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria;
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }
@@ -118,7 +119,6 @@ try {
         $stmt->bindParam(':doc_id', $documentId);
         $stmt->execute();
 
-        $documentId = $documentId;
     } else {
         // Insert new document
         $query = "INSERT INTO documents 

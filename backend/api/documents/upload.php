@@ -56,6 +56,7 @@ try {
     }
 
     // Create upload directory structure
+    // Go up 2 levels to reach backend root: documents/ -> api/ -> backend/
     $uploadDir = __DIR__ . '/../../IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria;
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0777, true);
@@ -118,7 +119,6 @@ try {
         $stmt->bindParam(':doc_id', $documentId);
         $stmt->execute();
 
-        $documentId = $documentId;
     } else {
         // Insert new document
         $query = "INSERT INTO documents 
