@@ -75,32 +75,32 @@ $path = trim($path, '/');
 // Route mapping
 $routes = [
     // Authentication
-    'POST /auth/login' => 'api/auth/login.php',
-    'POST /auth/logout' => 'api/auth/logout.php',
-    'GET /auth/verify' => 'api/auth/verify.php',
+    'POST /auth/login' => 'auth/login.php',
+    'POST /auth/logout' => 'auth/logout.php',
+    'GET /auth/verify' => 'auth/verify.php',
 
     // Documents
-    'GET /documents' => 'api/documents/get.php',
-    'POST /documents/upload' => 'api/documents/upload.php',
-    'PUT /documents/update_status' => 'api/documents/update_status.php',
-    'DELETE /documents/delete' => 'api/documents/delete.php',
+    'GET /documents' => 'documents/get.php',
+    'POST /documents/upload' => 'documents/upload.php',
+    'PUT /documents/update_status' => 'documents/update_status.php',
+    'DELETE /documents/delete' => 'documents/delete.php',
 
     // Users
-    'GET /users' => 'api/users/get.php',
-    'POST /users' => 'api/users/create.php',
-    'PUT /users' => 'api/users/update.php',
-    'DELETE /users' => 'api/users/delete.php',
+    'GET /users' => 'users/get.php',
+    'POST /users' => 'users/create.php',
+    'PUT /users' => 'users/update.php',
+    'DELETE /users' => 'users/delete.php',
 
     // Assignments
-    'GET /assignments' => 'api/assignments/get.php',
-    'POST /assignments' => 'api/assignments/create.php',
-    'DELETE /assignments' => 'api/assignments/delete.php',
+    'GET /assignments' => 'assignments/get.php',
+    'POST /assignments' => 'assignments/create.php',
+    'DELETE /assignments' => 'assignments/delete.php',
 
     // Statistics
-    'GET /stats' => 'api/stats/get.php',
+    'GET /stats' => 'stats/get.php',
 
     // Test endpoints
-    'GET /test/db' => 'api/test/db.php',
+    'GET /test/db' => 'test/db.php',
 ];
 
 // Build route key
