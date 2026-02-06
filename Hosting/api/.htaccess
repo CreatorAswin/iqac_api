@@ -1,0 +1,39 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Set the base directory for rewrites
+RewriteBase /
+
+# Skip rewriting for actual files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [L]
+
+# Route API requests to index.php
+RewriteRule ^api/(.*)$ index.php [QSA,L]
+
+# Route all other requests to index.php for SPA routing
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security: Prevent directory listing
+Options -Indexes
+
+# Security: Protect sensitive files
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Protect .env file
+<Files ".env">
+    Require all denied
+</Files>
+
+# Set PHP settings
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+php_value max_execution_time 300
+php_value max_input_time 300
