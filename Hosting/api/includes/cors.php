@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     // Check if origin is allowed
     $isAllowed = false;
     $allowedOrigin = '';
-    
+
     foreach (ALLOWED_ORIGINS as $allowed) {
         $allowed = trim($allowed);
         if ($origin === $allowed || (substr($allowed, -1) === '*' && strpos($origin, rtrim($allowed, '*')) === 0)) {
@@ -35,19 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             break;
         }
     }
-    
+
     // Set appropriate origin for OPTIONS request
     if ($isAllowed) {
         header("Access-Control-Allow-Origin: $allowedOrigin");
     } else {
-        $firstAllowed = reset(ALLOWED_ORIGINS);
+        $allowedOriginsArray = ALLOWED_ORIGINS;
+        $firstAllowed = reset($allowedOriginsArray);
         if ($firstAllowed) {
             header("Access-Control-Allow-Origin: $firstAllowed");
         } else {
             header('Access-Control-Allow-Origin: *');
         }
     }
-    
+
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     header('Access-Control-Allow-Credentials: true');
@@ -74,7 +75,8 @@ if ($isAllowed) {
     header("Access-Control-Allow-Origin: $allowedOrigin");
 } else {
     // For production, only allow configured origins
-    $firstAllowed = reset(ALLOWED_ORIGINS);
+    $allowedOriginsArray = ALLOWED_ORIGINS;
+    $firstAllowed = reset($allowedOriginsArray);
     if ($firstAllowed) {
         header("Access-Control-Allow-Origin: $firstAllowed");
     } else {

@@ -6,17 +6,13 @@ RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Set the base directory for rewrites
-RewriteBase /
+RewriteBase /api/
 
-# Skip rewriting for actual files and directories
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
+# Skip rewriting only for actual files (not directories)
+RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule .* - [L]
 
-# Route API requests to index.php
-RewriteRule ^api/(.*)$ index.php [QSA,L]
-
-# Route all other requests to index.php for SPA routing
+# Route all requests to index.php
 RewriteRule ^(.*)$ index.php [QSA,L]
 
 # Security: Prevent directory listing
