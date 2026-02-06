@@ -4,10 +4,6 @@ RewriteEngine On
 # Set the base directory for rewrites
 RewriteBase /aqar/backend/
 
-# Allow direct access to IQAC folder for file downloads
-RewriteCond %{REQUEST_URI} ^/aqar/backend/IQAC/
-RewriteRule ^ - [L]
-
 # Route all API requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

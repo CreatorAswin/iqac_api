@@ -37,7 +37,7 @@ if (Test-Path $deploymentPath) {
 }
 New-Item -ItemType Directory -Force -Path $deploymentPath | Out-Null
 New-Item -ItemType Directory -Force -Path "$deploymentPath\api" | Out-Null
-New-Item -ItemType Directory -Force -Path "$deploymentPath\uploads" | Out-Null
+New-Item -ItemType Directory -Force -Path "$deploymentPath\IQAC" | Out-Null
 Write-Host "✓ Deployment directory created" -ForegroundColor Green
 
 # Step 4: Copy frontend files
@@ -54,6 +54,12 @@ Copy-Item -Path "$projectPath\backend\*" -Destination "$deploymentPath\api" -Rec
 # Exclude unnecessary files
 Remove-Item -Path "$deploymentPath\api\.env.development" -ErrorAction SilentlyContinue
 Remove-Item -Path "$deploymentPath\api\.env.local" -ErrorAction SilentlyContinue
+
+# Move IQAC folder from api to root level (same level as index.html)
+if (Test-Path "$deploymentPath\api\IQAC") {
+    Move-Item -Path "$deploymentPath\api\IQAC" -Destination "$deploymentPath\IQAC" -Force
+    Write-Host "✓ IQAC folder moved to root level" -ForegroundColor Green
+}
 
 Write-Host "✓ Backend files copied to 'api' folder" -ForegroundColor Green
 
@@ -105,7 +111,7 @@ Write-Host "2. Upload contents of $deploymentPath to:" -ForegroundColor White
 Write-Host "   /public_html/aqar/ on Hostinger" -ForegroundColor Gray
 Write-Host ""
 Write-Host "3. Set folder permissions:" -ForegroundColor White
-Write-Host "   - uploads/ folder: 755 or 777" -ForegroundColor Gray
+Write-Host "   - IQAC/ folder (root level): 755 or 777" -ForegroundColor Gray
 Write-Host "   - api/.env file: 644" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Press any key to open deployment folder..." -ForegroundColor Cyan

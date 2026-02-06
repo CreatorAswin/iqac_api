@@ -57,7 +57,7 @@ try {
 
     // Create upload directory structure
     // Go up 2 levels to reach backend root: documents/ -> api/ -> backend/
-    $uploadDir = __DIR__ . '/../../IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria;
+    $uploadDir = __DIR__ . '/../../../IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria;
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }
@@ -75,7 +75,7 @@ try {
     }
 
     // Generate file URL
-    $fileUrl = APP_URL . '/IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria . '/' . $uniqueFileName;
+    $fileUrl = APP_URL . '/../IQAC/' . $academicYear . '/' . $criteria . '/' . $subCriteria . '/' . $uniqueFileName;
 
     // Check if this is a reupload
     $isReupload = !empty($documentId);

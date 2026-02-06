@@ -80,7 +80,7 @@ class FileHandler
 
             // Generate relative path for URL
             $relativePath = str_replace(UPLOAD_DIR, '', $filePath);
-            $fileUrl = APP_URL . '/backend/IQAC/' . str_replace('\\', '/', $relativePath);
+            $fileUrl = APP_URL . '/../IQAC/' . str_replace('\\', '/', $relativePath);
 
             return [
                 'filePath' => $filePath,
